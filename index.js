@@ -3,18 +3,28 @@ import ReactDOM from 'react-dom';
 //import './index.css';
 
 
-function tick(){
-  const element = (
-    <div>
-      <h1>Hello, world!</h1>
-      <h2>It is {new Date().toLocaleTimeString()}.</h2>
-    </div>
-  );
-  
-  ReactDOM.render(
-    element,
-    document.getElementById('root')
-  )  
+//组件，从概念上类似于 JavaScript 函数。它接受任意的入参（即 “props”），并返回用于描述页面展示内容的 React 元素。
+//函数组件和class组件
+
+// function Welcome(props) {
+//   return <h1>Hello, {props.name}</h1>
+// }
+
+// class Welcome extends React.Component{
+//   render(){
+//     return <h1>Hello, {this.props.name}</h1>
+//   }
+// }
+
+
+
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>
 }
 
-setInterval(tick, 1000);
+const element = <Welcome name = "Sara" />;
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+)
+
