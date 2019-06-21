@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { format } from 'url';
 //import './index.css';
 
 
@@ -30,24 +31,75 @@ import ReactDOM from 'react-dom';
 
 
 // 组合组件
-function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>
+// function Welcome(props) {
+//   return <h1>Hello, {props.name}</h1>
+// }
+
+// function App(){
+//   return (
+//     <div>
+//       <Welcome name = "Sara" />
+//       <Welcome name = "Cahal" />
+//       <Welcome name = "Edite" />
+//     </div>
+//   )
+// }
+
+// ReactDOM.render(
+//   App(),
+//   document.getElementById('root')
+// )
+
+// 提取组件
+function formatDate(date){
+  return date.toLocaleDateString();
 }
 
-function App(){
+function Comment(props){
   return (
-    <div>
-      <Welcome name = "Sara" />
-      <Welcome name = "Cahal" />
-      <Welcome name = "Edite" />
+    <div className = "Comment">
+      <div className = "UserInfo">
+        <img className = "Avatar"
+         src = {props.author.avataUrl}
+         alt = {props.author.name} 
+        />
+        <div className = "UserInfo-name">
+          {props.author.name}
+        </div>
+      </div>
+      <div className = "Comment-text">
+        {props.text}
+      </div>
+      <div className = "Comment-date">
+        {formatDate(props.date)}
+      </div>
     </div>
-  )
+  );
 }
+
+const comment = {
+  date:new Date(),
+  text:"I hope you enjoy learning react!",
+  author:{
+    name:"Hello Kitty",
+    avataUrl:"https://placekitten.com/g/64/64"
+  }
+}
+
+// ReactDOM.render(
+//   Comment(comment),
+//   document.getElementById('root')
+// );
 
 ReactDOM.render(
-  App(),
+  <Comment 
+    date = {comment.date}
+    text = {comment.text}
+    author = {comment.author}
+  />,
   document.getElementById('root')
 )
+
 
 
 
