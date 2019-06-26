@@ -5,21 +5,45 @@ import { format } from 'url';
 
 
 //条件渲染
-//与运算符 &&
-function Mailbox(props) {
-  const unreadMessages = props.unreadMessages;
+//阻止组件渲染
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
   return (
-  <div>
-    <h1>Hello!</h1>
-    {
-      unreadMessages.length > 0 && <h2>You have {unreadMessages.length} unread messages.</h2>
-    }
-  </div>
-  );
+    <div className = "Warning">
+      Warning!
+    </div>
+  )
 }
 
-const messages = ['React', 'Re: React', 'Re:Re: React'];
+class Page extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {showWarning:true};
+    this.handToggleClick = this.handToggleClick.bind(this);
+  }
+
+  handToggleClick () {
+    this.setState(state=>({
+      showWarning:!state.showWarning
+    }));
+  }  
+
+  render() {
+    return (
+      <div>
+        <WarningBanner warn = {this.state.showWarning} />
+        <button onClick = {this.handToggleClick}>
+          {this.state.showWarning?'Hide':'Show'}
+        </button>
+      </div>
+    )
+  }
+}
+
 ReactDOM.render(
-  <Mailbox unreadMessages = {messages} />,
+  <Page />,
   document.getElementById('root')
 )
+
