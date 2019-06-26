@@ -4,70 +4,40 @@ import { format } from 'url';
 //import './index.css';
 
 
-//state & 生命周期
-//State 与 props 类似，但是 state 是私有的，并且完全受控于当前组件。
+//事件处理
 
-// function Clock(props){
-//   return (
-//     <div>
-//       <h1>Hello, world!</h1>
-//       <h2>It is {props.date.toLocaleTimeString()}.</h2>
-//     </div>
-//   );
-// }
-
-// function tick() {
-//   ReactDOM.render(
-//     <Clock date = {new Date()}/>,
-//     document.getElementById('root')
-//   );
-// }
-
-// setInterval(tick, 1000);
-
-
-//构造函数是唯一可以给 this.state 赋值的地方
-
-function FormattedDate(props) {
-  return <h2>It is {props.date.toLocaleTimeString()}.</h2>
-}
-
-class Clock extends React.Component {
+class Toggle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date:new Date(),
-    };
+      isToggleOn:true
+    }
+    // 为了在回调中使用 `this`，这个绑定是必不可少的
+    this.handclick = this.handclick.bind(this)
   }
   
-  componentDidMount() {
-    this.timerId = setInterval(
-      () => this.tick(),
-      1000
-    );
-  }
+  // handclick() {
+  //   this.setState({
+  //     isToggleOn:!this.state.isToggleOn
+  //   });
+  // }
 
-  componentWillReceiveProps() {
-    clearInterval(this.timerId);
-  }
-
-  tick() {
-    this.setState({
-      date:new Date()
-    });
+  handclick() {
+    this.setState(state=>({
+      isToggleOn:!state.isToggleOn
+    }));
   }
 
   render() {
     return (
-      <div>
-        <h1>Hello, world!</h1>
-        <FormattedDate date = {this.state.date} />
-      </div>
+    <button onClick = {this.handclick}>
+      {this.state.isToggleOn?'ON':'OFF'}
+    </button>
     );
   }
 }
 
 ReactDOM.render(
-  <Clock />,
+  <Toggle />,
   document.getElementById('root')
 )
