@@ -1,49 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { format } from 'url';
+//import { format } from 'url';
 //import './index.css';
 
 
-//条件渲染
-//阻止组件渲染
-function WarningBanner(props) {
-  if (!props.warn) {
-    return null;
-  }
-  return (
-    <div className = "Warning">
-      Warning!
-    </div>
+//类别&Key
+
+// const numbers = [1, 2, 3, 4, 5];
+// const doubled = numbers.map((number)=>number*2);
+// console.log(doubled)
+
+
+// const numbers = [1, 2, 3, 4, 5];
+// const listItems = numbers.map((number)=>
+//   <li>{number}</li>
+// )
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number)=>
+    <li key = {number.toString()}>
+      {number}
+    </li>
   )
+  return (<ul>{listItems}</ul>);
 }
 
-class Page extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {showWarning:true};
-    this.handToggleClick = this.handToggleClick.bind(this);
-  }
-
-  handToggleClick () {
-    this.setState(state=>({
-      showWarning:!state.showWarning
-    }));
-  }  
-
-  render() {
-    return (
-      <div>
-        <WarningBanner warn = {this.state.showWarning} />
-        <button onClick = {this.handToggleClick}>
-          {this.state.showWarning?'Hide':'Show'}
-        </button>
-      </div>
-    )
-  }
-}
-
+const numbers = [1, 2, 3, 4, 5];
 ReactDOM.render(
-  <Page />,
+  <NumberList numbers = {numbers} />,
   document.getElementById('root')
 )
 
