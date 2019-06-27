@@ -4,30 +4,35 @@ import ReactDOM from 'react-dom';
 //import './index.css';
 
 
-//textarea 标签
-class EssayForm extends React.Component {
+//select 标签
+class FlavorForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value:''};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {value:'coconut'};
+    this.handChange = this.handChange.bind(this);
+    this.handSubmit = this.handSubmit.bind(this);
   }
-
-  handleChange(event) {
+  
+  handChange(event) {
     this.setState({value:event.target.value});
   }
 
-  handleSubmit(event) {
-    alert('提交的名字'+this.state.value);
+  handSubmit(event) {
+    alert('Your favorate flavor is :' + this.state.value);
     event.preventDefault();
   }
 
   render() {
     return (
-      <form onSubmit = {this.handleSubmit}>
+      <form onSubmit = {this.handSubmit}>
         <label>
-          文章:
-          <textarea type = "text" value = {this.state.value} onChange = {this.handleChange} />
+          选择您喜欢的口味：
+          <select value = {this.state.value} onChange = {this.handChange}>
+            <option value = "grapefruit">葡萄柚</option>
+            <option value = "lime">酸橙</option>
+            <option value = "coconut">椰子</option>
+            <option value = "mango">芒果</option>
+          </select>
         </label>
         <input type = "submit" value = "提交" />
       </form>
@@ -36,6 +41,6 @@ class EssayForm extends React.Component {
 }
 
 ReactDOM.render(
-  <EssayForm />,
+  <FlavorForm />,
   document.getElementById('root')
 );
