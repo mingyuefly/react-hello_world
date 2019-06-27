@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 //import './index.css';
 
 
-//表单
-class NameForm extends React.Component {
+//textarea 标签
+class EssayForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value:''};
@@ -26,8 +26,8 @@ class NameForm extends React.Component {
     return (
       <form onSubmit = {this.handleSubmit}>
         <label>
-          名字：
-          <input type = "text" value = {this.state.value} onChange = {this.handleChange} />
+          文章:
+          <textarea type = "text" value = {this.state.value} onChange = {this.handleChange} />
         </label>
         <input type = "submit" value = "提交" />
       </form>
@@ -36,6 +36,6 @@ class NameForm extends React.Component {
 }
 
 ReactDOM.render(
-  <NameForm />,
+  <EssayForm />,
   document.getElementById('root')
 );
