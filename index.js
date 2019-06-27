@@ -4,43 +4,42 @@ import ReactDOM from 'react-dom';
 //import './index.css';
 
 
-//select 标签
-class FlavorForm extends React.Component {
+//文件 input 标签
+class Reservation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value:'coconut'};
-    this.handChange = this.handChange.bind(this);
-    this.handSubmit = this.handSubmit.bind(this);
-  }
-  
-  handChange(event) {
-    this.setState({value:event.target.value});
+    this.state = {isGoing:true, numberOfGuests:2};
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handSubmit(event) {
-    alert('Your favorate flavor is :' + this.state.value);
-    event.preventDefault();
+  handleChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox'?target.checked:target.value;
+    const name = target.name;
+    this.setState({
+      [name]:value
+    });
   }
 
   render() {
     return (
-      <form onSubmit = {this.handSubmit}>
+      <form>
         <label>
-          选择您喜欢的口味：
-          <select value = {this.state.value} onChange = {this.handChange}>
-            <option value = "grapefruit">葡萄柚</option>
-            <option value = "lime">酸橙</option>
-            <option value = "coconut">椰子</option>
-            <option value = "mango">芒果</option>
-          </select>
+          参与：
+          <input name = "isGoing" type = "checkbox" checked = {this.state.isGoing} onChange = {this.handleChange} />
         </label>
-        <input type = "submit" value = "提交" />
+        <br />
+        <label>
+          来宾人数：
+          <input name = "numberOfGuests" type = "number" value = {this.state.numberOfGuests} onChange = {this.handleChange} />
+        </label>
       </form>
     );
   }
 }
 
 ReactDOM.render(
-  <FlavorForm />,
+  <Reservation />,
   document.getElementById('root')
-);
+)
+
